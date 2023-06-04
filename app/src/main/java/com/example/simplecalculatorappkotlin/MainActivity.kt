@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     //-99 -> 99
                     tvValue = tvValue.substring(1)
                 }
-                if(tvValue.contains("-")){
+                if (tvValue.contains("-")) {
                     val splitValue = tvValue.split("-")
                     var one = splitValue[0] //99
                     var two = splitValue[1] //1
@@ -65,9 +65,8 @@ class MainActivity : AppCompatActivity() {
                         one = prefix + one
 
                     var result = one.toDouble() - two.toDouble()
-                    tvInput?.text = result.toString()
-                }
-                else if(tvValue.contains("+")){
+                    tvInput?.text = removeZeroAfterDot(result.toString())
+                } else if (tvValue.contains("+")) {
                     val splitValue = tvValue.split("+")
                     var one = splitValue[0] //99
                     var two = splitValue[1] //1
@@ -75,9 +74,8 @@ class MainActivity : AppCompatActivity() {
                         one = prefix + one
 
                     var result = one.toDouble() + two.toDouble()
-                    tvInput?.text = result.toString()
-                }
-                else if(tvValue.contains("/")){
+                    tvInput?.text = removeZeroAfterDot(result.toString())
+                } else if (tvValue.contains("/")) {
                     val splitValue = tvValue.split("/")
                     var one = splitValue[0] //99
                     var two = splitValue[1] //1
@@ -85,9 +83,8 @@ class MainActivity : AppCompatActivity() {
                         one = prefix + one
 
                     var result = one.toDouble() / two.toDouble()
-                    tvInput?.text = result.toString()
-                }
-                else if(tvValue.contains("*")){
+                    tvInput?.text = removeZeroAfterDot(result.toString())
+                } else if (tvValue.contains("*")) {
                     val splitValue = tvValue.split("*")
                     var one = splitValue[0] //99
                     var two = splitValue[1] //1
@@ -95,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                         one = prefix + one
 
                     var result = one.toDouble() * two.toDouble()
-                    tvInput?.text = result.toString()
+                    tvInput?.text = removeZeroAfterDot(result.toString())
                 }
 
 
@@ -105,6 +102,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+}
+
+private fun removeZeroAfterDot(result: String): String {
+    var value = result
+    if (result.contains(".0"))
+        value = result.substring(0, result.length - 2)
+    return value
 }
 
 private fun isOperatorAdded(value: String): Boolean {
